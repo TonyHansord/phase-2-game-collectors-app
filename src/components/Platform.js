@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Platform(props) {
+function Platform({ id, name, clickHandler }) {
   return (
-    <div className="platform" onClick={() => props.clickHandler(props.id)}>
-      <p>{props.name}</p>
+    <div className="platform" onClick={() => clickHandler(id)}>
+      <p>{name}</p>
     </div>
   );
 }

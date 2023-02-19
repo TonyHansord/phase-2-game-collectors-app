@@ -3,14 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import * as Constants from './data/constants';
 
-fetch(`https://api.rawg.io/api/platforms?key=${process.env.REACT_APP_API_KEY}`)
+fetch(
+  `https://api.rawg.io/api/platforms/lists/parents?key=${process.env.REACT_APP_API_KEY}&ordering=name`
+)
   .then((res) => res.json())
   .then((platformData) => {
+    const filteredPlatforms = platformData.results.filter(
+      (parent) => !Constants.excludedPlatforms.includes(parent.name)
+    );
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
-        <App platforms={platformData.results} />
+        <App platforms={filteredPlatforms} />
       </React.StrictMode>
     );
   });

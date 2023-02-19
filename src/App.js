@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
-import Platform from './components/Platform';
+import ParentPlatform from './components/ParentPlatform';
 import GameCard from './components/GameCard';
 
-function App({ platforms }) {
+function App({ platforms: parentPlatforms }) {
   const [visibleGames, setVisibleGames] = useState([]);
 
   function handlePlatformClick(id) {
     console.log(id);
 
     fetch(
-      `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&platforms=${id}&page_size=1000&ordering=-rating`
+      `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&platforms=${id}&page_size=40&ordering=-rating`
     )
       .then((res) => res.json())
       .then((games) => {
@@ -19,12 +19,13 @@ function App({ platforms }) {
       });
   }
 
-  const platformList = platforms.map(({ id, name }) => {
+  const platformList = parentPlatforms.map(({ id, name, platforms }) => {
     return (
-      <Platform
+      <ParentPlatform
         key={id}
         id={id}
         name={name}
+        platforms={platforms}
         clickHandler={handlePlatformClick}
       />
     );
@@ -38,8 +39,8 @@ function App({ platforms }) {
           return (
             <GameCard
               key={game.id}
-              image={game.short_screenshots[0].image}
-              title={game.slug}
+              image={game.background_image}
+              title={game.name}
             />
           );
         })}
