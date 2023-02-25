@@ -1,50 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import ParentPlatform from './components/ParentPlatform';
-import GameCard from './components/GameCard';
+import * as Constants from './data/constants';
+import ResultsContainer from './components/ResultsContainer';
 
-function App({ platforms: parentPlatforms }) {
-  const [visibleGames, setVisibleGames] = useState([]);
+function App() {
+  const [platformList, setPlatformList] = useState([]);
+  const [selectedPlatform, setSelectedPlatform] = useState({
+    id: 79,
+    name: 'SNES',
+    slug: 'snes',
+  });
 
-  function handlePlatformClick(id) {
-    console.log(id);
-
+  useEffect(() => {
     fetch(
-      `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&platforms=${id}&page_size=40&ordering=-rating`
+      `https://api.rawg.io/api/platforms/lists/parents?key=${process.env.REACT_APP_API_KEY}&ordering=name`
     )
       .then((res) => res.json())
-      .then((games) => {
-        console.log(games.results);
-        setVisibleGames(games.results);
-      });
-  }
+      .then((platformData) => {
+        const filteredPlatforms = platformData.results.filter(
+          (parent) => !Constants.excludedPlatforms.includes(parent.name)
+        );
 
-  const platformList = parentPlatforms.map(({ id, name, platforms }) => {
-    return (
-      <ParentPlatform
-        key={id}
-        id={id}
-        name={name}
-        platforms={platforms}
-        clickHandler={handlePlatformClick}
-      />
-    );
-  });
+        const parentPlatformList = filteredPlatforms.map(
+          ({ id, name, slug, platforms }) => {
+            return (
+              <ParentPlatform
+                key={id}
+                id={id}
+                name={name}
+                slug={slug}
+                platforms={platforms}
+                clickHandler={handleDisplayPlatformResults}
+                selectedPlatformHandler={handleDisplayPlatformResults}
+              />
+            );
+          }
+        );
+
+        setPlatformList(parentPlatformList);
+      });
+  }, []);
+
+  function handleDisplayPlatformResults({ id, name, slug }) {
+    setSelectedPlatform({ id, name, slug });
+  }
 
   return (
     <div className="App">
-      <div id="platform-bar">{platformList}</div>
-      <div id="results">
-        {visibleGames.map((game) => {
-          return (
-            <GameCard
-              key={game.id}
-              image={game.background_image}
-              title={game.name}
-            />
-          );
-        })}
-      </div>
+      <Router>
+        <Route path="/:platform">
+          <div id="platform-bar">{platformList}</div>
+          <ResultsContainer selectedPlatform={selectedPlatform} />
+        </Route>
+        <Route exact path="/">
+          <div id="platform-bar">{platformList}</div>
+          <ResultsContainer selectedPlatform={selectedPlatform} />
+        </Route>
+      </Router>
     </div>
   );
 }

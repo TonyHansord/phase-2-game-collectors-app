@@ -1,10 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Platform({ id, name, clickHandler }) {
+function Platform({ id, name, slug, clickHandler }) {
   return (
-    <div className="platform" onClick={() => clickHandler(id)}>
-      <p>{name}</p>
-    </div>
+    <Link
+      to={`/${slug}`}
+      className={`platform`}
+      onClick={() => clickHandler({ id, name, slug })}
+    >
+      {name}
+    </Link>
   );
 }
 

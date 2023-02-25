@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .App {
   display: flex;
   justify-content: space-between;
@@ -36,6 +40,7 @@
 }
 
 #platform-bar {
+  border-right: #61dafb solid 1px;
   position: fixed;
   top: 0;
   left: 0;
@@ -50,7 +55,11 @@
   color: white;
   overflow-y: scroll;
 }
-.platform {
+
+#platform-bar::-webkit-scrollbar {
+  display: none;
+}
+.platform-parent {
   width: 100%;
   padding: 0;
   background-color: #282c34;
@@ -59,32 +68,50 @@
   text-decoration: none;
 }
 
-.platform > summary {
+.platform-parent > summary {
   list-style: none;
   cursor: pointer;
   padding: 1rem 0.5rem;
 }
 
-.platform:hover {
+.platform-parent:hover {
   background-color: #61dafb;
   color: #282c34;
   cursor: pointer;
 }
 
-.platform[open] {
+.platform-parent[open] {
   background-color: #8261fb;
   color: #282c34;
 }
 
-#results {
-  display: grid;
+.platform {
+  display: block;
+  padding: 1rem;
+  background-color: #ffffff;
+  color: #61dafb;
+  text-align: left;
+  text-decoration: none;
+}
+
+.platform:hover,
+.platform:active {
+  background-color: #61dafb;
+  color: #282c34;
+  cursor: pointer;
+}
+
+#results-container {
+  margin-left: 25%;
   width: 100%;
   padding: 2rem;
+}
+
+#results {
+  display: grid;
   justify-content: space-evenly;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(240px, 4fr));
-  margin-left: 25%;
-  background-color: #282c34;
 }
 
 .game-card {
@@ -94,15 +121,19 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  overflow: hidden;
+  box-shadow: 4px 4px 5px #282c34;
 }
 
 .card-title {
-  background-color: #61dafb;
-  color: #282c34;
+  background-color: #282c34;
+  color: #61dafb;
   padding: 1rem 0;
   font-size: 75%;
   width: inherit;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  line-height: 1em;
+  max-height: 2em;
 }
 
 .card-image {
