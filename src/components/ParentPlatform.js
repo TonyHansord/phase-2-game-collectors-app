@@ -19,9 +19,6 @@ function ParentPlatform({
     }
   });
 
-  const { platform } = useParams();
-  console.log(platform);
-
   // selectedPlatformHandler({
   //   id: matchingPlatform.id,
   //   name: matchingPlatform.name,

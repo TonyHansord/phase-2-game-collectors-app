@@ -1,35 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import CollectionSelect from './CollectionSelect';
 import GameCard from './GameCard';
+import Results from './Results';
 
 function ResultsContainer({ selectedPlatform }) {
-  const [gameList, setGameList] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&platforms=${selectedPlatform.id}&page_size=40&ordering=-rating`
-    )
-      .then((res) => res.json())
-      .then((games) => {
-        const gameCards = games.results.map((game) => {
-          return (
-            <GameCard
-              key={game.id}
-              image={game.background_image}
-              title={game.name}
-            />
-          );
-        });
-        setGameList(gameCards);
-      });
-  }, [selectedPlatform.id]);
+  const [selectedCollection, setSelectedCollection] = useState('all');
+  const [resultsPage, setResultsPage] = useState(1);
 
   return (
     <div id="results-container">
       <h1>{selectedPlatform.name}</h1>
-      <div id="results">{gameList}</div>
+
+      <CollectionSelect clickHandler={setSelectedCollection} />
+      <Results
+        collectionType={selectedCollection}
+        platformID={selectedPlatform.id}
+        platformSlug={selectedPlatform.slug}
+        resultsPage={resultsPage}
+      ></Results>
       <div id="page-buttons">
-        <button>Previous</button>
-        <button>Next</button>
+        <button onClick={() => setResultsPage(resultsPage - 1)}>
+          Previous
+        </button>
+        <p>{resultsPage}</p>
+        <button onClick={() => setResultsPage(resultsPage + 1)}>Next</button>
       </div>
     </div>
   );
