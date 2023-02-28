@@ -1,0 +1,85 @@
+#platform-bar {
+  border-right: #61dafb solid 1px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 25%;
+  height: 100vh;
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1rem;
+  color: white;
+  overflow-y: scroll;
+}
+
+#platform-bar::-webkit-scrollbar {
+  display: none;
+}
+
+#search-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 1rem;
+  background-color: #282c34;
+  color: #61dafb;
+  text-align: left;
+  text-decoration: none;
+  border-bottom: #61dafb solid 1px;
+}
+
+.search-bar-input {
+  padding: 0.5rem;
+  background-color: #4c4d4f;
+  color: #61dafb;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.platform-parent {
+  width: 100%;
+  padding: 0;
+  background-color: #282c34;
+  color: #61dafb;
+  text-align: left;
+  text-decoration: none;
+}
+
+.platform-parent > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 0.5rem;
+}
+
+.platform-parent:hover {
+  background-color: #61dafb;
+  color: #282c34;
+  cursor: pointer;
+}
+
+.platform-parent[open] {
+  background-color: #8261fb;
+  color: #282c34;
+}
+
+.platform {
+  display: block;
+  padding: 1rem;
+  background-color: #4c4d4f;
+  color: #61dafb;
+  text-align: left;
+  text-decoration: none;
+}
+
+.platform:hover,
+.platform.active {
+  background-color: #61dafb;
+  color: #282c34;
+  cursor: pointer;
+}
