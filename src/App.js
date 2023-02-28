@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
-import ParentPlatform from './components/ParentPlatform';
+import PlatformBar from './components/PlatformBar/PlatformBar';
 import * as Constants from './data/constants';
-import ResultsContainer from './components/ResultsContainer';
+import ResultsContainer from './components/ResultsSection/ResultsContainer';
+import SearchContainer from './components/ResultsSection/SearchContainer';
 
 function App() {
   const [platformList, setPlatformList] = useState([]);
-  const [selectedPlatform, setSelectedPlatform] = useState({
-    id: 79,
-    name: 'SNES',
-    slug: 'snes',
-  });
+  const [selectedPlatform, setSelectedPlatform] = useState({});
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -23,23 +21,7 @@ function App() {
           (parent) => !Constants.excludedPlatforms.includes(parent.name)
         );
 
-        const parentPlatformList = filteredPlatforms.map(
-          ({ id, name, slug, platforms }) => {
-            return (
-              <ParentPlatform
-                key={id}
-                id={id}
-                name={name}
-                slug={slug}
-                platforms={platforms}
-                clickHandler={handleDisplayPlatformResults}
-                selectedPlatformHandler={handleDisplayPlatformResults}
-              />
-            );
-          }
-        );
-
-        setPlatformList(parentPlatformList);
+        setPlatformList(filteredPlatforms);
       });
   }, []);
 
@@ -47,17 +29,37 @@ function App() {
     setSelectedPlatform({ id, name, slug });
   }
 
+  function handleSearchResults(data) {
+    setSearchResults(data);
+  }
+
   return (
     <div className="App">
       <Router>
-        <Route path="/:platform">
-          <div id="platform-bar">{platformList}</div>
-          <ResultsContainer selectedPlatform={selectedPlatform} />
+        <Route path="/search">
+          <PlatformBar
+            platforms={platformList}
+            clickHandler={handleDisplayPlatformResults}
+            handleSearchResults={handleSearchResults}
+          />
+          <SearchContainer data={searchResults} />
+        </Route>
+        {/* <Route path="/:platform">
+          <PlatformBar
+            platforms={platformList}
+            clickHandler={handleDisplayPlatformResults}
+            handleSearchResults={handleSearchResults}
+          />
+          <ResultsContainer selectedPlatform={selectedPlatform} data={[]} />
         </Route>
         <Route exact path="/">
-          <div id="platform-bar">{platformList}</div>
-          <ResultsContainer selectedPlatform={selectedPlatform} />
-        </Route>
+          <PlatformBar
+            platforms={platformList}
+            clickHandler={handleDisplayPlatformResults}
+            handleSearchResults={handleSearchResults}
+          />
+          <ResultsContainer selectedPlatform={selectedPlatform} data={[]} />
+        </Route> */}
       </Router>
     </div>
   );

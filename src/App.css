@@ -1,3 +1,5 @@
+@import './components/PlatformBar/PlatformBar.css';
+
 * {
   margin: 0;
   padding: 0;
@@ -39,68 +41,6 @@ body::-webkit-scrollbar {
   color: #61dafb;
 }
 
-#platform-bar {
-  border-right: #61dafb solid 1px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 25%;
-  height: 100vh;
-  background-color: #282c34;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  font-size: 1rem;
-  color: white;
-  overflow-y: scroll;
-}
-
-#platform-bar::-webkit-scrollbar {
-  display: none;
-}
-.platform-parent {
-  width: 100%;
-  padding: 0;
-  background-color: #282c34;
-  color: #61dafb;
-  text-align: left;
-  text-decoration: none;
-}
-
-.platform-parent > summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 1rem 0.5rem;
-}
-
-.platform-parent:hover {
-  background-color: #61dafb;
-  color: #282c34;
-  cursor: pointer;
-}
-
-.platform-parent[open] {
-  background-color: #8261fb;
-  color: #282c34;
-}
-
-.platform {
-  display: block;
-  padding: 1rem;
-  background-color: #ffffff;
-  color: #61dafb;
-  text-align: left;
-  text-decoration: none;
-}
-
-.platform:hover,
-.platform:active {
-  background-color: #61dafb;
-  color: #282c34;
-  cursor: pointer;
-}
-
 #results-container {
   margin-left: 25%;
   width: 100%;
@@ -140,6 +80,17 @@ body::-webkit-scrollbar {
   width: 100%;
   height: 200px;
   object-fit: cover;
+}
+
+.card-image-missing {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #4c4d4f;
+  color: #898c8c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-container {
