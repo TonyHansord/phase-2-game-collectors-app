@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch, useParams } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import PlatformBar from './components/PlatformBar/PlatformBar';
 import * as Constants from './data/constants';
@@ -71,7 +71,7 @@ function App() {
           <PlatformBar
             platforms={platformList}
             childPlatforms={childPlatforms}
-            clickHandler={handleDisplayPlatformResults}
+            clickHandler={() => console.log('')}
             handleSearchResults={handleSearchResults}
           />
           <ResultsContainer

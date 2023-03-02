@@ -1,6 +1,4 @@
 import React from 'react';
-import AddToButton from './AddToButton';
-import GameInfo from '../GamePage/GameInfo';
 import { useHistory } from 'react-router-dom';
 
 function GameCard({ game, setGame }) {

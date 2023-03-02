@@ -12,19 +12,16 @@ function PlatformBar({
   const history = useHistory();
 
   const { platform } = useParams();
-  console.log(platform);
 
   useEffect(() => {
     console.log(`running useEffect in PlatformBar`);
     childPlatforms.forEach(({ id, name, slug }) => {
-      console.log(slug);
       if (slug === platform) {
-        console.log(`slug` + slug);
         clickHandler({ id, name, slug });
         history.push(`/platform/${slug}`);
       }
     });
-  }, [platform, childPlatforms]);
+  }, [platform, childPlatforms, history, clickHandler]);
 
   const platformList = platforms.map(({ id, name, platforms }) => (
     <ParentPlatform

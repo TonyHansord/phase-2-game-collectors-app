@@ -11,7 +11,6 @@ function Results({ collectionType, platform, resultsPage, setGame }) {
         return <GameCard key={game.id} game={game} setGame={setGame} />;
       });
       setGameList(gameCards);
-      console.log(games);
     }
 
     switch (collectionType) {
@@ -30,10 +29,9 @@ function Results({ collectionType, platform, resultsPage, setGame }) {
           .then((res) => res.json())
           .then((results) => {
             renderGames(results.games);
-            console.log(results);
           });
     }
-  }, [collectionType, platform, resultsPage]);
+  }, [collectionType, platform, resultsPage, setGame]);
 
   return <div id="results">{gameList}</div>;
 }
