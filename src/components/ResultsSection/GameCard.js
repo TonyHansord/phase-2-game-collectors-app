@@ -1,8 +1,12 @@
 import React from 'react';
 import AddToButton from './AddToButton';
+import GameInfo from '../GamePage/GameInfo';
+import { useHistory } from 'react-router-dom';
 
-function GameCard({ game, platform, games }) {
-  const { name, background_image } = game;
+function GameCard({ game, setGame }) {
+  const { name, background_image, id } = game;
+  const history = useHistory();
+
   const gameImage =
     background_image !== null ? (
       <img
@@ -17,24 +21,16 @@ function GameCard({ game, platform, games }) {
       </div>
     );
 
+  function handleClick() {
+    console.log(game);
+    setGame(game);
+    history.push(`/game/${id}`);
+  }
+
   return (
-    <div className="game-card">
+    <div className="game-card" onClick={handleClick}>
       <p className="card-title">{name}</p>
       {gameImage}
-      {/* <div className="btn-container">
-        <AddToButton
-          collectionType="collection"
-          games={games}
-          correspondingGame={game}
-          platform={platform}
-        />
-        <AddToButton
-          collectionType="wishlist"
-          games={games}
-          correspondingGame={game}
-          platform={platform}
-        />
-      </div> */}
     </div>
   );
 }

@@ -34,12 +34,19 @@
   border-bottom: #61dafb solid 1px;
 }
 
+form {
+  width: 90%;
+}
+
 .search-bar-input {
-  padding: 0.5rem;
+  padding: 1rem;
   background-color: #4c4d4f;
   color: #61dafb;
   border: none;
-  border-radius: 0.25rem;
+}
+
+input.search-bar-input {
+  width: 80%;
 }
 
 .platform-parent {

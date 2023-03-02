@@ -7,6 +7,7 @@ function SearchBar({ handleSearchResults }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    history.push('/search');
 
     const searchQuery = search.split(' ').join('+');
 
@@ -15,8 +16,7 @@ function SearchBar({ handleSearchResults }) {
     )
       .then((res) => res.json())
       .then((results) => {
-        // handleSearchResults(results.results);
-        history.push('/search');
+        handleSearchResults(results.results);
       });
   };
 

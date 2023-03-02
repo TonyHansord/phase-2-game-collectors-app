@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CollectionSelect from './CollectionSelect';
 import Results from './Results';
 
-function ResultsContainer({ selectedPlatform }) {
+function ResultsContainer({ selectedPlatform, setGame }) {
   const [selectedCollection, setSelectedCollection] = useState('all');
   const [resultsPage, setResultsPage] = useState(1);
 
@@ -15,6 +15,7 @@ function ResultsContainer({ selectedPlatform }) {
         collectionType={selectedCollection}
         platform={selectedPlatform}
         resultsPage={resultsPage}
+        setGame={setGame}
       ></Results>
 
       <div id="page-buttons">

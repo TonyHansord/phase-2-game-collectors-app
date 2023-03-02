@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function Platform({ id, name, slug, clickHandler }) {
   return (
     <NavLink
-      to={`/${slug}`}
+      to={`/platform/${slug}`}
       className={({ isActive }) => (isActive ? 'platform active' : 'platform')}
       onClick={() => clickHandler({ id, name, slug })}
     >

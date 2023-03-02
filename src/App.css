@@ -3,6 +3,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body::-webkit-scrollbar {
@@ -41,10 +42,12 @@ body::-webkit-scrollbar {
   color: #61dafb;
 }
 
-#results-container {
+#results-container,
+#search-container {
   margin-left: 25%;
   width: 100%;
   padding: 2rem;
+  background-color: rgb(34, 168, 119);
 }
 
 #results {
@@ -110,4 +113,68 @@ body::-webkit-scrollbar {
 
 .add-to-btn#wishlist {
   background-color: orange;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 25vw;
+  width: 75vw;
+  gap: 1rem;
+  padding: 4rem;
+  background-color: rgb(49, 207, 176);
+}
+
+.game-header {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-items: center;
+  width: 100%;
+}
+
+.game-title {
+  display: flex;
+  flex-wrap: wrap;
+  color: #61dafb;
+  background-color: rgb(35, 145, 123);
+  justify-content: center;
+  align-content: center;
+  padding: 1rem 0;
+  font-size: 7rem;
+  text-overflow: ellipsis;
+  height: 200px;
+}
+
+.game-image {
+  width: 300px;
+  height: 200px;
+}
+
+.game-platforms {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #282c34;
+  color: #61dafb;
+}
+
+.game-platform {
+  display: grid;
+  flex-direction: row;
+
+  grid-template-columns: 60% 40%;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.game-platform > h1 {
+  font-size: 1.5rem;
+  text-align: left;
 }

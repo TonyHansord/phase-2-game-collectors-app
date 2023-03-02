@@ -2,13 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import GameCard from './GameCard';
 
-function Results({ collectionType, platform, resultsPage }) {
+function Results({ collectionType, platform, resultsPage, setGame }) {
   const [gameList, setGameList] = useState([]);
 
   useEffect(() => {
     function renderGames(games) {
       const gameCards = games.map((game) => {
-        return <GameCard key={game.id} game={game} platform={platform} />;
+        return <GameCard key={game.id} game={game} setGame={setGame} />;
       });
       setGameList(gameCards);
       console.log(games);
@@ -33,7 +33,7 @@ function Results({ collectionType, platform, resultsPage }) {
             console.log(results);
           });
     }
-  }, []);
+  }, [collectionType, platform, resultsPage]);
 
   return <div id="results">{gameList}</div>;
 }
