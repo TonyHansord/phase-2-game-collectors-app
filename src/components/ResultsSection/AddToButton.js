@@ -1,10 +1,11 @@
 import React from 'react';
+import { jsonDB } from '../../data/constants';
 
 function AddToButton({ collectionType, correspondingGame, platform }) {
   const { id, slug } = platform;
 
   function addToCollection() {
-    fetch(`http://localhost:3000/${collectionType}/${id}`)
+    fetch(`${jsonDB}/${collectionType}/${id}`)
       .then((res) => res.json())
       .then((results) => {
         const games = results.games;
@@ -17,7 +18,7 @@ function AddToButton({ collectionType, correspondingGame, platform }) {
 
         const updatedGames = [...games, gameObj];
 
-        fetch(`http://localhost:3000/${collectionType}/${id}`, {
+        fetch(`${jsonDB}/${collectionType}/${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ function AddToButton({ collectionType, correspondingGame, platform }) {
       })
       .catch((error) => {
         console.error('Error:', error);
-        fetch(`http://localhost:3000/${collectionType}`, {
+        fetch(`${jsonDB}/${collectionType}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

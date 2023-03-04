@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import GameCard from './GameCard';
+import { jsonDB } from '../../data/constants';
 
 function Results({ collectionType, platform, resultsPage, setGame }) {
   const [gameList, setGameList] = useState([]);
@@ -25,7 +26,7 @@ function Results({ collectionType, platform, resultsPage, setGame }) {
 
         break;
       default:
-        fetch(`http://localhost:3000/${collectionType}/${platform.id}`)
+        fetch(`${jsonDB}/${collectionType}/${platform.id}`)
           .then((res) => res.json())
           .then((results) => {
             renderGames(results.games);
