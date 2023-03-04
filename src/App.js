@@ -71,7 +71,8 @@ function App() {
           <PlatformBar
             platforms={platformList}
             childPlatforms={childPlatforms}
-            clickHandler={() => console.log('')}
+            clickHandler={handleDisplayPlatformResults}
+            renderGames={setSelectedPlatform}
             handleSearchResults={handleSearchResults}
           />
           <ResultsContainer

@@ -8,20 +8,20 @@ function PlatformBar({
   childPlatforms,
   clickHandler,
   handleSearchResults,
+  renderGames,
 }) {
   const history = useHistory();
 
   const { platform } = useParams();
 
   useEffect(() => {
-    console.log(`running useEffect in PlatformBar`);
     childPlatforms.forEach(({ id, name, slug }) => {
       if (slug === platform) {
-        clickHandler({ id, name, slug });
+        renderGames({ id, name, slug });
         history.push(`/platform/${slug}`);
       }
     });
-  }, [platform, childPlatforms, history, clickHandler]);
+  }, [platform, childPlatforms, history, renderGames]);
 
   const platformList = platforms.map(({ id, name, platforms }) => (
     <ParentPlatform
