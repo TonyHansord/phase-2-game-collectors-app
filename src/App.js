@@ -13,6 +13,8 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [childPlatforms, setChildPlatforms] = useState([]);
   const [selectedGame, setSelectedGame] = useState({});
+  const [searchPage, setSearchPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetch(
@@ -50,10 +52,16 @@ function App() {
     setSelectedPlatform({ id, name, slug });
   }
 
-  function handleSearchResults(data) {
-    console.log('running handleSearchResults');
-    setSearchResults(data);
-  }
+  useEffect(() => {
+    fetch(
+      `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&search=${searchQuery}&page=${searchPage}&page_size=40`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.results);
+        setSearchResults(data.results);
+      });
+  }, [searchQuery, searchPage]);
 
   return (
     <div className="App">
@@ -63,9 +71,15 @@ function App() {
             platforms={platformList}
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
-            handleSearchResults={handleSearchResults}
+            setSearchQuery={setSearchQuery}
           />
-          <SearchContainer data={searchResults} setGame={setSelectedGame} />
+          <SearchContainer
+            data={searchResults}
+            setGame={setSelectedGame}
+            page={searchPage}
+            setPage={setSearchPage}
+            title={'Results of ' + searchQuery}
+          />
         </Route>
         <Route path={`/platform/:platform`}>
           <PlatformBar
@@ -73,7 +87,7 @@ function App() {
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
             renderGames={setSelectedPlatform}
-            handleSearchResults={handleSearchResults}
+            setSearchQuery={setSearchQuery}
           />
           <ResultsContainer
             selectedPlatform={selectedPlatform}
@@ -85,7 +99,7 @@ function App() {
             platforms={platformList}
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
-            handleSearchResults={handleSearchResults}
+            setSearchQuery={setSearchQuery}
           />
           <GameInfo selectedGame={selectedGame} />
         </Route>
@@ -94,11 +108,14 @@ function App() {
             platforms={platformList}
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
-            handleSearchResults={handleSearchResults}
+            setSearchQuery={setSearchQuery}
           />
-          <ResultsContainer
-            selectedPlatform={selectedPlatform}
+          <SearchContainer
+            data={searchResults}
             setGame={setSelectedGame}
+            page={searchPage}
+            setPage={setSearchPage}
+            title="Popular Games"
           />
         </Route>
       </Switch>

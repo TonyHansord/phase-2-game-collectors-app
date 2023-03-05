@@ -7,7 +7,7 @@ function GameInfo({ selectedGame, games }) {
 
   const gamePlatforms = selectedGame.platforms.map(({ platform }) => {
     return (
-      <div className="game-platform">
+      <div className="game-platform" key={platform.id}>
         <h1>{platform.name}</h1>
         <div className="btn-container">
           <AddToButton

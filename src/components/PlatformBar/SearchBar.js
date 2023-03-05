@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function SearchBar({ handleSearchResults }) {
+function SearchBar({ setSearchQuery }) {
   const history = useHistory();
   const [search, setSearch] = useState('');
 
@@ -11,13 +11,7 @@ function SearchBar({ handleSearchResults }) {
 
     const searchQuery = search.split(' ').join('+');
 
-    fetch(
-      `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&search=${searchQuery}`
-    )
-      .then((res) => res.json())
-      .then((results) => {
-        handleSearchResults(results.results);
-      });
+    setSearchQuery(searchQuery);
   };
 
   const handleChange = (e) => {

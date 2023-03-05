@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import GameCard from './GameCard';
+import { SearchResults } from './SearchResults';
 
-function SearchContainer({ data, setGame }) {
+function SearchContainer({ data, setGame, page, setPage, title }) {
   console.log('in search container');
-  console.log(data);
-  const [page, setPage] = useState(1);
 
   const gameCards = data.map((game) => {
     return <GameCard key={game.id} game={game} setGame={setGame} />;
@@ -12,8 +11,8 @@ function SearchContainer({ data, setGame }) {
 
   return (
     <div id="search-container">
-      <h1>Search</h1>
-      <div id="results">{gameCards}</div>
+      <h1>{title}</h1>
+      <SearchResults cards={gameCards} />
       <div id="page-buttons">
         <button onClick={() => setPage(page - 1)}>Previous</button>
         <p>{page}</p>
