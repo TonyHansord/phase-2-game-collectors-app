@@ -1,7 +1,14 @@
 import React from 'react';
 import AddToButton from '../ResultsSection/AddToButton';
 
-function GameInfo({ selectedGame, games, gameCollection, wishlist }) {
+function GameInfo({
+  selectedGame,
+  games,
+  gameCollection,
+  wishlist,
+  updateCollection,
+  updateWishlist,
+}) {
   const gamePlatforms = selectedGame.platforms.map(({ platform }) => {
     console.log(platform.slug);
 
@@ -53,6 +60,7 @@ function GameInfo({ selectedGame, games, gameCollection, wishlist }) {
             correspondingGame={selectedGame}
             platform={platform}
             inCollection={gameInCollection}
+            updateFunction={updateCollection}
           />
           <AddToButton
             collectionType="wishlist"
@@ -60,6 +68,7 @@ function GameInfo({ selectedGame, games, gameCollection, wishlist }) {
             correspondingGame={selectedGame}
             platform={platform}
             inCollection={gameInWishlist}
+            updateFunction={updateWishlist}
           />
         </div>
       </div>

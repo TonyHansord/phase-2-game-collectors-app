@@ -54,20 +54,28 @@ function App() {
     setSelectedPlatform({ id, name, slug });
   }
 
-  useEffect(() => {
+  function updateCollection() {
     fetch(`${Constants.jsonDB}/collection`)
       .then((res) => res.json())
       .then((collection) => {
         setGameCollection(collection);
       });
-  }, []);
+  }
 
-  useEffect(() => {
+  function updateWishlist() {
     fetch(`${Constants.jsonDB}/wishlist`)
       .then((res) => res.json())
       .then((collection) => {
         setWishlist(collection);
       });
+  }
+
+  useEffect(() => {
+    updateCollection();
+  }, []);
+
+  useEffect(() => {
+    updateWishlist();
   }, []);
 
   useEffect(() => {
@@ -125,6 +133,8 @@ function App() {
             selectedGame={selectedGame}
             gameCollection={gameCollection}
             wishlist={wishlist}
+            updateCollection={updateCollection}
+            updateWishlist={updateWishlist}
           />
         </Route>
         <Route exact path="/">

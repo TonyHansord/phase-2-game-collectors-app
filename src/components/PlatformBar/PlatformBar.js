@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ParentPlatform from './ParentPlatform';
 import SearchBar from './SearchBar';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 
 function PlatformBar({
   platforms,
@@ -35,7 +35,11 @@ function PlatformBar({
 
   return (
     <div id="platform-bar">
+      <Link to="/" onClick={() => setSearchQuery('')}>
+        Home
+      </Link>
       <SearchBar setSearchQuery={setSearchQuery} />
+      <p>Platforms</p>
       <React.Fragment>{platformList}</React.Fragment>
     </div>
   );

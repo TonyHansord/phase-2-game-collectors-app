@@ -5,7 +5,6 @@ import Results from './Results';
 function ResultsContainer({ selectedPlatform, setGame, collection, wishlist }) {
   const [selectedCollection, setSelectedCollection] = useState('all');
   const [resultsPage, setResultsPage] = useState(1);
-  const [platformInCollection, setPlatformInCollection] = useState(false);
 
   console.log(collection);
   console.log(wishlist);
@@ -42,14 +41,15 @@ function ResultsContainer({ selectedPlatform, setGame, collection, wishlist }) {
         resultsPage={resultsPage}
         setGame={setGame}
       ></Results>
-
-      <div id="page-buttons">
-        <button onClick={() => setResultsPage(resultsPage - 1)}>
-          Previous
-        </button>
-        <p>{resultsPage}</p>
-        <button onClick={() => setResultsPage(resultsPage + 1)}>Next</button>
-      </div>
+      {selectedCollection === 'all' ? (
+        <div id="page-buttons">
+          <button onClick={() => setResultsPage(resultsPage - 1)}>
+            Previous
+          </button>
+          <p>{resultsPage}</p>
+          <button onClick={() => setResultsPage(resultsPage + 1)}>Next</button>
+        </div>
+      ) : null}
     </div>
   );
 }

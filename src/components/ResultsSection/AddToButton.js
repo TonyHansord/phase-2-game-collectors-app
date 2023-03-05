@@ -7,6 +7,7 @@ function AddToButton({
   platform,
   collection,
   inCollection,
+  updateFunction,
 }) {
   const { id, slug } = platform;
 
@@ -29,6 +30,7 @@ function AddToButton({
           .then((response) => response.json())
           .then((data) => {
             console.log('Success:', data);
+            updateFunction();
           });
       })
       .catch(() => {
@@ -43,7 +45,12 @@ function AddToButton({
             platform_name: slug,
             games: [correspondingGame],
           }),
-        });
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Success:', data);
+            updateFunction();
+          });
       });
   }
 
