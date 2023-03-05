@@ -15,6 +15,8 @@ function App() {
   const [selectedGame, setSelectedGame] = useState({});
   const [searchPage, setSearchPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
+  const [gameCollection, setGameCollection] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -51,6 +53,22 @@ function App() {
   function handleDisplayPlatformResults({ id, name, slug }) {
     setSelectedPlatform({ id, name, slug });
   }
+
+  useEffect(() => {
+    fetch(`${Constants.jsonDB}/collection`)
+      .then((res) => res.json())
+      .then((collection) => {
+        setGameCollection(collection);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`${Constants.jsonDB}/wishlist`)
+      .then((res) => res.json())
+      .then((collection) => {
+        setWishlist(collection);
+      });
+  }, []);
 
   useEffect(() => {
     fetch(
@@ -92,6 +110,8 @@ function App() {
           <ResultsContainer
             selectedPlatform={selectedPlatform}
             setGame={setSelectedGame}
+            collection={gameCollection}
+            wishlist={wishlist}
           />
         </Route>
         <Route path={`/game/:game`}>
@@ -101,7 +121,11 @@ function App() {
             clickHandler={handleDisplayPlatformResults}
             setSearchQuery={setSearchQuery}
           />
-          <GameInfo selectedGame={selectedGame} />
+          <GameInfo
+            selectedGame={selectedGame}
+            gameCollection={gameCollection}
+            wishlist={wishlist}
+          />
         </Route>
         <Route exact path="/">
           <PlatformBar
