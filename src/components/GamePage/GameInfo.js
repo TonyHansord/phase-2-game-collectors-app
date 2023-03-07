@@ -10,8 +10,6 @@ function GameInfo({
   updateWishlist,
 }) {
   const gamePlatforms = selectedGame.platforms.map(({ platform }) => {
-    console.log(platform.slug);
-
     const gameInCollection = gameCollection.some((col) => {
       const platformInCollection = col.platform_name === platform.slug;
 
@@ -47,8 +45,6 @@ function GameInfo({
         return false;
       }
     });
-
-    console.log('game in collection = ' + gameInCollection);
 
     return (
       <div className="game-platform">

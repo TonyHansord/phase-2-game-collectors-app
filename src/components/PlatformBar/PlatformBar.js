@@ -10,6 +10,7 @@ function PlatformBar({
   handleSearchResults,
   renderGames,
   setSearchQuery,
+  setSearchPlatform,
 }) {
   const history = useHistory();
 
@@ -38,7 +39,11 @@ function PlatformBar({
       <Link to="/" onClick={() => setSearchQuery('')}>
         Home
       </Link>
-      <SearchBar setSearchQuery={setSearchQuery} />
+      <SearchBar
+        setSearchQuery={setSearchQuery}
+        childPlatforms={childPlatforms}
+        setSearchPlatform={setSearchPlatform}
+      />
       <p>Platforms</p>
       <React.Fragment>{platformList}</React.Fragment>
     </div>

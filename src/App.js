@@ -15,6 +15,7 @@ function App() {
   const [selectedGame, setSelectedGame] = useState({});
   const [searchPage, setSearchPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchPlatform, setSearchPlatform] = useState('all');
   const [gameCollection, setGameCollection] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
@@ -80,14 +81,18 @@ function App() {
 
   useEffect(() => {
     fetch(
-      `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&search=${searchQuery}&page=${searchPage}&page_size=40`
+      `https://api.rawg.io/api/games?key=${
+        process.env.REACT_APP_API_KEY
+      }&search=${searchQuery}${
+        searchPlatform !== 'all' ? `&platforms=${searchPlatform}` : ''
+      }&page=${searchPage}&page_size=40`
     )
       .then((res) => res.json())
       .then((data) => {
         console.log(data.results);
         setSearchResults(data.results);
       });
-  }, [searchQuery, searchPage]);
+  }, [searchQuery, searchPage, searchPlatform]);
 
   return (
     <div className="App">
@@ -98,6 +103,7 @@ function App() {
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
             setSearchQuery={setSearchQuery}
+            setSearchPlatform={setSearchPlatform}
           />
           <SearchContainer
             data={searchResults}
@@ -114,6 +120,7 @@ function App() {
             clickHandler={handleDisplayPlatformResults}
             renderGames={setSelectedPlatform}
             setSearchQuery={setSearchQuery}
+            setSearchPlatform={setSearchPlatform}
           />
           <ResultsContainer
             selectedPlatform={selectedPlatform}
@@ -128,6 +135,7 @@ function App() {
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
             setSearchQuery={setSearchQuery}
+            setSearchPlatform={setSearchPlatform}
           />
           <GameInfo
             selectedGame={selectedGame}
@@ -143,6 +151,7 @@ function App() {
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
             setSearchQuery={setSearchQuery}
+            setSearchPlatform={setSearchPlatform}
           />
           <SearchContainer
             data={searchResults}
