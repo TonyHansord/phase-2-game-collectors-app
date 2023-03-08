@@ -19,9 +19,24 @@
   display: none;
 }
 
+.section-header {
+  width: 100%;
+  padding: 1rem 0.5rem;
+  background-color: #282c34;
+  color: #61dafb;
+  text-align: center;
+  text-decoration: none;
+  border-bottom: #61dafb solid 1px;
+}
+
+#home-link:hover {
+  background-color: #61dafb;
+  color: #282c34;
+}
+
 #search-bar {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   gap: 1rem;
   align-items: center;
@@ -29,24 +44,29 @@
   padding: 2rem 1rem;
   background-color: #282c34;
   color: #61dafb;
-  text-align: left;
+  text-align: center;
   text-decoration: none;
   border-bottom: #61dafb solid 1px;
 }
 
 form {
-  width: 90%;
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .search-bar-input {
-  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
   background-color: #4c4d4f;
   color: #61dafb;
   border: none;
-}
-
-input.search-bar-input {
-  width: 80%;
+  width: 100%;
+  text-align: center;
 }
 
 .platform-parent {

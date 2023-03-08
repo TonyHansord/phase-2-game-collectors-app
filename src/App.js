@@ -102,6 +102,7 @@ function App() {
             platforms={platformList}
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
+            setSearchPage={setSearchPage}
             setSearchQuery={setSearchQuery}
             setSearchPlatform={setSearchPlatform}
           />
@@ -119,6 +120,7 @@ function App() {
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
             renderGames={setSelectedPlatform}
+            setSearchPage={setSearchPage}
             setSearchQuery={setSearchQuery}
             setSearchPlatform={setSearchPlatform}
           />
@@ -134,6 +136,7 @@ function App() {
             platforms={platformList}
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
+            setSearchPage={setSearchPage}
             setSearchQuery={setSearchQuery}
             setSearchPlatform={setSearchPlatform}
           />
@@ -150,6 +153,7 @@ function App() {
             platforms={platformList}
             childPlatforms={childPlatforms}
             clickHandler={handleDisplayPlatformResults}
+            setSearchPage={setSearchPage}
             setSearchQuery={setSearchQuery}
             setSearchPlatform={setSearchPlatform}
           />

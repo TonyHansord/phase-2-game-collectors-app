@@ -17,7 +17,7 @@ function Results({ collectionType, platform, resultsPage, setGame }) {
     switch (collectionType) {
       case 'all':
         fetch(
-          `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&platforms=${platform.id}&page=${resultsPage}&page_size=40&ordering=name`
+          `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&platforms=${platform.id}&page=${resultsPage}&page_size=40`
         )
           .then((res) => res.json())
           .then((games) => {

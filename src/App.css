@@ -1,13 +1,26 @@
 @import './components/PlatformBar/PlatformBar.css';
 
+:root {
+  --body-background-color: rgb(34, 148, 168);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  background-color: var(--body-background-color);
+}
+
 body::-webkit-scrollbar {
   display: none;
+}
+
+button:hover {
+  opacity: 0.8;
+  color: #282c34;
 }
 
 .App {
@@ -46,14 +59,16 @@ body::-webkit-scrollbar {
 #search-container {
   margin-left: 25%;
   width: 100%;
+  height: 100%;
   padding: 2rem;
-  background-color: rgb(34, 168, 119);
+  background-color: transparent;
 }
 
 #results {
   display: grid;
   justify-content: space-evenly;
   gap: 1rem;
+  padding: 2rem 0;
   grid-template-columns: repeat(auto-fill, minmax(240px, 4fr));
 }
 
@@ -101,10 +116,12 @@ body::-webkit-scrollbar {
   width: 100%;
 }
 
-.add-to-btn {
+.add-to-btn,
+.remove-btn {
   width: 100%;
   border: none;
-  padding: 0.5rem;
+  padding: 1rem;
+  cursor: pointer;
 }
 
 .add-to-btn#collection {
@@ -115,6 +132,38 @@ body::-webkit-scrollbar {
   background-color: orange;
 }
 
+.remove-btn {
+  background-color: #fb6161;
+}
+
+.results-title {
+  font-size: calc(2rem + 1vw);
+  padding: 2rem;
+}
+
+.results-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.results-buttons > button {
+  border: none;
+  background-color: #282c34;
+  color: #61dafb;
+  width: 100px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+#collection-select > .active {
+  background-color: #8261fb;
+  color: #000;
+}
+
 .game-info {
   display: flex;
   flex-direction: column;
@@ -122,9 +171,10 @@ body::-webkit-scrollbar {
   align-items: center;
   margin-left: 25vw;
   width: 75vw;
+  height: 100vh;
   gap: 1rem;
   padding: 4rem;
-  background-color: rgb(49, 207, 176);
+  background-color: transparent;
 }
 
 .game-header {
@@ -137,12 +187,12 @@ body::-webkit-scrollbar {
 .game-title {
   display: flex;
   flex-wrap: wrap;
-  color: #61dafb;
-  background-color: rgb(35, 145, 123);
+  color: #383939;
+  background-color: rgba(35, 145, 123, 0.5);
   justify-content: center;
   align-content: center;
   padding: 1rem 0;
-  font-size: 7rem;
+  font-size: calc(1rem + 1vw);
   text-overflow: ellipsis;
   height: 200px;
 }

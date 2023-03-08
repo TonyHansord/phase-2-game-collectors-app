@@ -7,7 +7,7 @@ function PlatformBar({
   platforms,
   childPlatforms,
   clickHandler,
-  handleSearchResults,
+  setSearchPage,
   renderGames,
   setSearchQuery,
   setSearchPlatform,
@@ -36,7 +36,15 @@ function PlatformBar({
 
   return (
     <div id="platform-bar">
-      <Link to="/" onClick={() => setSearchQuery('')}>
+      <Link
+        className="section-header"
+        id="home-link"
+        to="/"
+        onClick={() => {
+          setSearchQuery('');
+          setSearchPage(1);
+        }}
+      >
         Home
       </Link>
       <SearchBar
@@ -44,7 +52,7 @@ function PlatformBar({
         childPlatforms={childPlatforms}
         setSearchPlatform={setSearchPlatform}
       />
-      <p>Platforms</p>
+      <p className="section-header">Platforms</p>
       <React.Fragment>{platformList}</React.Fragment>
     </div>
   );

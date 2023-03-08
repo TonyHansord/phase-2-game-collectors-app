@@ -1,54 +1,67 @@
 import React, { useState } from 'react';
 import CollectionSelect from './CollectionSelect';
 import Results from './Results';
+import PageButtons from './PageButtons';
 
 function ResultsContainer({ selectedPlatform, setGame, collection, wishlist }) {
   const [selectedCollection, setSelectedCollection] = useState('all');
   const [resultsPage, setResultsPage] = useState(1);
+  const [collectionIsEmpty, setCollectionIsEmpty] = useState(false);
 
-  console.log(collection);
-  console.log(wishlist);
+  // console.log(collection);
+  // console.log(wishlist);
 
   console.log(selectedPlatform);
 
   function handleCollectionChange(collectionType) {
-    const collectionObj =
-      collectionType !== 'all' && collectionType === 'collection'
-        ? collection
-        : wishlist;
-
-    console.log(collectionObj);
-
-    const isInCollection = collectionObj.find(
-      (platform) => selectedPlatform.slug === platform.platform_name
-    );
-
-    console.log(isInCollection);
-
-    if (isInCollection) {
-      setSelectedCollection(collectionType);
+    switch (collectionType) {
+      case 'collection':
+        setSelectedCollection('collection');
+        const isInCollection = collection.some(
+          (platform) => selectedPlatform.slug === platform.platform_name
+        );
+        if (isInCollection) {
+          setCollectionIsEmpty(false);
+        } else {
+          setCollectionIsEmpty(true);
+        }
+        break;
+      case 'wishlist':
+        setSelectedCollection('wishlist');
+        const isInWishlist = wishlist.some(
+          (platform) => selectedPlatform.slug === platform.platform_name
+        );
+        if (isInWishlist) {
+          setCollectionIsEmpty(false);
+        } else {
+          setCollectionIsEmpty(true);
+        }
+        break;
+      default:
+        setSelectedCollection('all');
+        setCollectionIsEmpty(false);
+        break;
     }
   }
 
-  return (
-    <div id="results-container">
-      <h1>{selectedPlatform.name}</h1>
-
-      <CollectionSelect clickHandler={handleCollectionChange} />
+  const renderResults = () => {
+    return (
       <Results
         collectionType={selectedCollection}
         platform={selectedPlatform}
         resultsPage={resultsPage}
         setGame={setGame}
       ></Results>
+    );
+  };
+  return (
+    <div id="results-container">
+      <h1 className="results-title">{selectedPlatform.name}</h1>
+
+      <CollectionSelect clickHandler={handleCollectionChange} />
+      {collectionIsEmpty ? null : renderResults()}
       {selectedCollection === 'all' ? (
-        <div id="page-buttons">
-          <button onClick={() => setResultsPage(resultsPage - 1)}>
-            Previous
-          </button>
-          <p>{resultsPage}</p>
-          <button onClick={() => setResultsPage(resultsPage + 1)}>Next</button>
-        </div>
+        <PageButtons page={resultsPage} setPage={setResultsPage} />
       ) : null}
     </div>
   );

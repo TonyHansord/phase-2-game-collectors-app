@@ -41,7 +41,11 @@ function SearchBar({ setSearchQuery, childPlatforms, setSearchPlatform }) {
           onChange={handleTextChange}
           value={search}
         />
-        <select onChange={handlePlatformChange} value={platform}>
+        <select
+          className="search-bar-input"
+          onChange={handlePlatformChange}
+          value={platform}
+        >
           <option value="all">All</option>
           {platformFilterOptions}
         </select>
