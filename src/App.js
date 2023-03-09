@@ -89,7 +89,6 @@ function App() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.results);
         setSearchResults(data.results);
       });
   }, [searchQuery, searchPage, searchPlatform]);

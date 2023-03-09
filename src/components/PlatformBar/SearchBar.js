@@ -12,9 +12,10 @@ function SearchBar({ setSearchQuery, childPlatforms, setSearchPlatform }) {
 
     const searchQuery = search.split(' ').join('+');
 
-    console.log(platform);
     setSearchQuery(searchQuery);
     setSearchPlatform(platform);
+    setSearch('');
+    setPlatform('all');
   };
 
   const handleTextChange = (e) => {
@@ -26,8 +27,6 @@ function SearchBar({ setSearchQuery, childPlatforms, setSearchPlatform }) {
   };
 
   const platformFilterOptions = childPlatforms.map((child) => {
-    console.log(child);
-
     return <option value={child.id}>{child.name}</option>;
   });
 

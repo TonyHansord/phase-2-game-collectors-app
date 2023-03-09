@@ -43,6 +43,7 @@ function PlatformBar({
         onClick={() => {
           setSearchQuery('');
           setSearchPage(1);
+          setSearchPlatform('all');
         }}
       >
         Home

@@ -2,6 +2,7 @@
 
 :root {
   --body-background-color: rgb(34, 148, 168);
+  --opaque-body-background-color: rgba(34, 148, 168, 0.5);
 }
 
 * {
@@ -171,7 +172,7 @@ button:hover {
   align-items: center;
   margin-left: 25vw;
   width: 75vw;
-  height: 100vh;
+  height: 100%;
   gap: 1rem;
   padding: 4rem;
   background-color: transparent;
@@ -188,7 +189,7 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   color: #383939;
-  background-color: rgba(35, 145, 123, 0.5);
+  background-color: var(--opaque-body-background-color);
   justify-content: center;
   align-content: center;
   padding: 1rem 0;

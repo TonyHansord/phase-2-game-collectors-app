@@ -8,11 +8,6 @@ function ResultsContainer({ selectedPlatform, setGame, collection, wishlist }) {
   const [resultsPage, setResultsPage] = useState(1);
   const [collectionIsEmpty, setCollectionIsEmpty] = useState(false);
 
-  // console.log(collection);
-  // console.log(wishlist);
-
-  console.log(selectedPlatform);
-
   function handleCollectionChange(collectionType) {
     switch (collectionType) {
       case 'collection':

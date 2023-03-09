@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { jsonDB } from '../../data/constants';
 
 function AddToButton({
@@ -11,7 +11,10 @@ function AddToButton({
 }) {
   const { id, slug } = platform;
 
+  const [inCollectionState, setInCollectionState] = useState(inCollection);
+
   function removeFromCollection() {
+    setInCollectionState(false);
     fetch(`${jsonDB}/${collectionType}/${id}`)
       .then((res) => res.json())
       .then((res) => {
@@ -37,6 +40,7 @@ function AddToButton({
   }
 
   function addToCollection() {
+    setInCollectionState(true);
     fetch(`${jsonDB}/${collectionType}/${id}`)
       .then((res) => res.json())
       .then((results) => {
@@ -81,13 +85,13 @@ function AddToButton({
 
   return (
     <button
-      className={inCollection ? 'remove-btn' : 'add-to-btn'}
+      className={inCollectionState ? 'remove-btn' : 'add-to-btn'}
       id={collectionType}
       onClick={
         inCollection ? () => removeFromCollection() : () => addToCollection()
       }
     >
-      {inCollection
+      {inCollectionState
         ? 'Remove from ' + collectionType
         : 'Add to ' + collectionType}
     </button>
