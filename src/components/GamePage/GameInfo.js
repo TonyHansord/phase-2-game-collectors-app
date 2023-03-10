@@ -1,5 +1,5 @@
 import React from 'react';
-import AddToButton from '../ResultsSection/AddToButton';
+import AddToButton from './AddToButton';
 
 function GameInfo({
   selectedGame,
